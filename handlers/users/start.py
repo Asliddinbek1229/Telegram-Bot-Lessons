@@ -1,7 +1,7 @@
 from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandStart
 from states.personalData import PersonalData
-from keyboards.default.startButtons import menuStart
+from keyboards.default.startMenuKeyboard import menuStart
 
 from loader import dp
 
