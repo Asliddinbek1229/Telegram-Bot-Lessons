@@ -139,44 +139,58 @@ async def buy_books(call: CallbackQuery):
 
 
 
+users = {}
 
 @dp.callback_query_handler(book_shop_callback.filter(item_name="buypython"))
-async def buy_python(call: CallbackQuery, callback_data: dict, msg: Message):
-    logging.info(f"{callback_data=}")
-    user_data = call.data
-    messega = msg.from_user.id
-    logging.info(f"{user_data=}")
-    logging.info(f"{messega=}")
+async def buy_python(call: CallbackQuery, callback_data: dict):
+    user_shop = callback_data['item_name']
+    # logging.info(f"{user_shop}")
+    user_id = call.from_user.id
+    # logging.info(f"{user_id=}")
+    users[user_shop] = user_id
+    logging.info(users)
     await call.answer("Buyurtmangiz qabul qilindi", cache_time=60, show_alert=True)
 
 
 @dp.callback_query_handler(book_shop_callback.filter(item_name="buyjs"))
 async def buy_python(call: CallbackQuery, callback_data: dict):
-    logging.info(f"{callback_data=}")
-    user_data = call.data
-    logging.info(f"{user_data=}")
+    user_shop = callback_data['item_name']
+    # logging.info(f"{user_shop}")
+    user_id = call.from_user.id
+    # logging.info(f"{user_id=}")
+    users[user_shop] = user_id
+    logging.info(users)
     await call.answer("Buyurtmangiz qabul qilindi", cache_time=60, show_alert=True)
 
 
 @dp.callback_query_handler(book_shop_callback.filter(item_name="buyhtml"))
 async def buy_python(call: CallbackQuery, callback_data: dict):
-    logging.info(f"{callback_data=}")
-    user_data = call.data
-    logging.info(f"{user_data=}")
+    user_shop = callback_data['item_name']
+    # logging.info(f"{user_shop}")
+    user_id = call.from_user.id
+    # logging.info(f"{user_id=}")
+    users[user_shop] = user_id
+    logging.info(users)
     await call.answer("Buyurtmangiz qabul qilindi", cache_time=60, show_alert=True)
 
 
 @dp.callback_query_handler(book_shop_callback.filter(item_name="buyfront"))
 async def buy_python(call: CallbackQuery, callback_data: dict):
-    logging.info(f"{callback_data=}")
-    user_data = call.data
-    logging.info(f"{user_data=}")
+    user_shop = callback_data['item_name']
+    # logging.info(f"{user_shop}")
+    user_id = call.from_user.id
+    # logging.info(f"{user_id=}")
+    users[user_shop] = user_id
+    logging.info(users)
     await call.answer("Buyurtmangiz qabul qilindi", cache_time=60, show_alert=True)
 
 
 @dp.callback_query_handler(book_shop_callback.filter(item_name="buydjango"))
 async def buy_python(call: CallbackQuery, callback_data: dict):
-    logging.info(f"{callback_data=}")
-    user_data = call.data
-    logging.info(f"{user_data=}")
+    user_shop = callback_data['item_name']
+    # logging.info(f"{user_shop}")
+    user_id = call.from_user.id
+    # logging.info(f"{user_id=}")
+    users[user_shop] = user_id
+    logging.info(users)
     await call.answer("Buyurtmangiz qabul qilindi", cache_time=60, show_alert=True)
