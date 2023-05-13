@@ -1,7 +1,8 @@
 from aiogram.types import Message
 from aiogram.types import CallbackQuery
-from keyboards.inline.productButtons import categoryMenu, courseMenu, pythonMenu, djangoMenu, botMenu, algoritmMenu, booksMenu,\
-      buyPythonBook, buyPythonBook2
+from keyboards.inline.productButtons import categoryMenu, courseMenu, pythonMenu, djangoMenu, botMenu, algoritmMenu, booksMenu, \
+      buyPythonBook, buyDjangoBook, buyFrontBook, buyHtmlBook, buyJsBook
+from keyboards.inline.callback_data import course_callback, book_callback, book_shop_callback
 
 import logging
 
@@ -14,21 +15,30 @@ async def select_category(msg: Message):
         "Mahsulot tanlang", reply_markup=categoryMenu
         )
     
+
+@dp.message_handler(text="📃 Qo'llanma")
+async def manual(msg: Message):
+    text = "<b>Admin bilan bog'lanish:</b>👇\n"
+    text += "https://t.me/Asliddinbek_official"
+    await msg.answer(text)
+
+
+    
 @dp.callback_query_handler(text='courses')
 async def buy_course(call: CallbackQuery):
     # callback_data = call.data
     # logging.info(f"{callback_data=}")
     # logging.info(f"{call.from_user.username=}")
-    await call.message.answer("Kursni tanlang", reply_markup=courseMenu)
+    await call.message.edit_text("Kursni tanlang", reply_markup=courseMenu)
     await call.answer(cache_time=60)
 
 
-@dp.callback_query_handler(text='python')
+@dp.callback_query_handler(course_callback.filter(item_name="python"))
 async def buy_python(call: CallbackQuery):
     callback_data = call.data
-    logging.info(f"{callback_data=}")
-    logging.info(f"{call.from_user.username=}")
-    await call.message.answer(
+    # logging.info(f"{callback_data=}")
+    # logging.info(f"{call.from_user.username=}")
+    await call.message.edit_text(
         "Siz Python dasturlash asoslari kursini tanladingiz", 
         reply_markup=pythonMenu
         )
@@ -38,17 +48,14 @@ async def buy_python(call: CallbackQuery):
 
 @dp.callback_query_handler(text='ortga')
 async def back_menu(call: CallbackQuery):
-    await call.message.answer(
-        "Mahsulot tanlang",
-        reply_markup=categoryMenu
-    )
+    await call.message.edit_text("Mahsulot tanlang", reply_markup=categoryMenu)
     await call.answer(cache_time=60)
 
 
 
-@dp.callback_query_handler(text='django')
+@dp.callback_query_handler(course_callback.filter(item_name='django'))
 async def buy_django(call: CallbackQuery):
-    await call.message.answer(
+    await call.message.edit_text(
         "Siz Djangoda web dasturlash kursini tanladingiz", 
         reply_markup=djangoMenu
         )
@@ -56,9 +63,9 @@ async def buy_django(call: CallbackQuery):
 
     
 
-@dp.callback_query_handler(text='bot')
+@dp.callback_query_handler(course_callback.filter(item_name='bot'))
 async def buy_django(call: CallbackQuery):
-    await call.message.answer(
+    await call.message.edit_text(
         "Siz Djangoda web dasturlash kursini tanladingiz", 
         reply_markup=botMenu
         )
@@ -66,9 +73,9 @@ async def buy_django(call: CallbackQuery):
 
     
 
-@dp.callback_query_handler(text='mtva')
+@dp.callback_query_handler(course_callback.filter(item_name='mtva'))
 async def buy_django(call: CallbackQuery):
-    await call.message.answer(
+    await call.message.edit_text(
         "Siz Ma'lumotlar tuzilmasi va algoritmlar kursini tanladingiz", 
         reply_markup=algoritmMenu
         )
@@ -78,25 +85,98 @@ async def buy_django(call: CallbackQuery):
 
 @dp.callback_query_handler(text="books")
 async def select_books(call: CallbackQuery):
-    await call.message.answer(
+    await call.message.edit_text(
         "Kitoblardan birini tanlang",
         reply_markup=booksMenu
     )
     await call.answer(cache_time=60)
 
 
-@dp.callback_query_handler(text="bookPython")
+@dp.callback_query_handler(book_callback.filter(item_name="bookPython"))
 async def buy_books(call: CallbackQuery):
-    await call.message.answer(
+    await call.message.edit_text(
         "Quyidagilardan birini tanlang",
         reply_markup=buyPythonBook
     )
     await call.answer(cache_time=60)
 
-@dp.callback_query_handler(text="buy_bookPython")
-async def Link(call: CallbackQuery):
-    await call.message.answer(
-        "Kitobni quyidagi sahifadan topishingiz mumkin",
-        reply_markup=buyPythonBook2
+
+@dp.callback_query_handler(book_callback.filter(item_name="book_js"))
+async def buy_books(call: CallbackQuery):
+    await call.message.edit_text(
+        "Quyidagilardan birini tanlang",
+        reply_markup=buyJsBook
     )
     await call.answer(cache_time=60)
+
+
+@dp.callback_query_handler(book_callback.filter(item_name="book_html"))
+async def buy_books(call: CallbackQuery):
+    await call.message.edit_text(
+        "Quyidagilardan birini tanlang",
+        reply_markup=buyHtmlBook
+    )
+    await call.answer(cache_time=60)
+
+
+@dp.callback_query_handler(book_callback.filter(item_name="book_front"))
+async def buy_books(call: CallbackQuery):
+    await call.message.edit_text(
+        "Quyidagilardan birini tanlang",
+        reply_markup=buyFrontBook
+    )
+    await call.answer(cache_time=60)
+
+
+@dp.callback_query_handler(book_callback.filter(item_name="book_django"))
+async def buy_books(call: CallbackQuery):
+    await call.message.edit_text(
+        "Quyidagilardan birini tanlang",
+        reply_markup=buyDjangoBook
+    )
+    await call.answer(cache_time=60)
+
+
+
+
+
+@dp.callback_query_handler(book_shop_callback.filter(item_name="buypython"))
+async def buy_python(call: CallbackQuery, callback_data: dict, msg: Message):
+    logging.info(f"{callback_data=}")
+    user_data = call.data
+    messega = msg.from_user.id
+    logging.info(f"{user_data=}")
+    logging.info(f"{messega=}")
+    await call.answer("Buyurtmangiz qabul qilindi", cache_time=60, show_alert=True)
+
+
+@dp.callback_query_handler(book_shop_callback.filter(item_name="buyjs"))
+async def buy_python(call: CallbackQuery, callback_data: dict):
+    logging.info(f"{callback_data=}")
+    user_data = call.data
+    logging.info(f"{user_data=}")
+    await call.answer("Buyurtmangiz qabul qilindi", cache_time=60, show_alert=True)
+
+
+@dp.callback_query_handler(book_shop_callback.filter(item_name="buyhtml"))
+async def buy_python(call: CallbackQuery, callback_data: dict):
+    logging.info(f"{callback_data=}")
+    user_data = call.data
+    logging.info(f"{user_data=}")
+    await call.answer("Buyurtmangiz qabul qilindi", cache_time=60, show_alert=True)
+
+
+@dp.callback_query_handler(book_shop_callback.filter(item_name="buyfront"))
+async def buy_python(call: CallbackQuery, callback_data: dict):
+    logging.info(f"{callback_data=}")
+    user_data = call.data
+    logging.info(f"{user_data=}")
+    await call.answer("Buyurtmangiz qabul qilindi", cache_time=60, show_alert=True)
+
+
+@dp.callback_query_handler(book_shop_callback.filter(item_name="buydjango"))
+async def buy_python(call: CallbackQuery, callback_data: dict):
+    logging.info(f"{callback_data=}")
+    user_data = call.data
+    logging.info(f"{user_data=}")
+    await call.answer("Buyurtmangiz qabul qilindi", cache_time=60, show_alert=True)

@@ -5,8 +5,8 @@ menuStart = ReplyKeyboardMarkup(
     one_time_keyboard=True,
     keyboard=[
         [
-            KeyboardButton(text="🛒 Mahsulotlar"),
-            KeyboardButton(text="🛒 Qo'llanma"),
+            KeyboardButton(text="🛍 Mahsulotlar"),
+            KeyboardButton(text="📃 Qo'llanma"),
         ],
     ],
 )
