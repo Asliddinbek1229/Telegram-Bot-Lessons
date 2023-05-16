@@ -7,7 +7,7 @@ from loader import dp
 
 @dp.message_handler(IsGroup(), CommandStart())
 async def bot_start(message: types.Message):
-    text = "<b>Guruhimizda yangi foydalanuvchi bir</b>\n"
+    text = "<b>Guruhimizda yangi foydalanuvchi bor</b>\n"
     text += f"Assalomu alaykum <b>{message.from_user.full_name}!</b> guruhga xush kelibsiz.\n\n"
-    text += "<i>Eslatib o'taman guruhda haqoratli so'zlar ishlatish ta'qiqlanadi!!!</b>"
+    text += "<i>Eslatib o'taman guruhda haqoratli so'zlar ishlatish ta'qiqlanadi!!!</i>"
     await message.answer(text)

@@ -4,8 +4,12 @@ import re
 
 import aiogram
 from aiogram import types
-from aiogram.dispatcher.filters import Command
+from aiogram.dispatcher.filters import Command, Regexp
 from aiogram.utils.exceptions import BadRequest
+from aiogram.dispatcher.filters import Text
+
+import logging
+
 
 from filters import IsGroup, AdminFilter
 from loader import dp, bot
@@ -113,3 +117,14 @@ async def unban_user(msg: types.Message):
     await asyncio.sleep(5)
     await msg.delete()
     await service_message.delete()
+
+
+from words import word
+@dp.message_handler(IsGroup())
+async def offensive_word(msg: types.Message):
+    for w in word:
+        if w in msg.text:
+            await msg.delete()
+            await msg.answer(f"<b>{msg.from_user.full_name}</b> iltimos guruhda haqoratli so'zlar ishlatmang!!!")
+
+
