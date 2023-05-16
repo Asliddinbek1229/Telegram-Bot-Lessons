@@ -1,9 +1,11 @@
 from aiogram import types
 from states.personalData import PersonalData
 
+from filters import IsPrivate
+
 from loader import dp
 
-@dp.message_handler(commands='info_html')
+@dp.message_handler(IsPrivate(), commands='info_html')
 async def bot_help(message: types.Message):
     text = (
         f"<b>Assalomu alaykum {message.from_user.full_name}</b>\n"

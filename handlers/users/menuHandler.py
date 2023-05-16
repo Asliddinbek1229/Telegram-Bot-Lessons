@@ -4,19 +4,21 @@ from keyboards.inline.productButtons import categoryMenu, courseMenu, pythonMenu
       buyPythonBook, buyDjangoBook, buyFrontBook, buyHtmlBook, buyJsBook
 from keyboards.inline.callback_data import course_callback, book_callback, book_shop_callback
 
+from filters import IsPrivate
+
 import logging
 
 from loader import dp 
 
 
-@dp.message_handler(text_contains="Mahsulotlar")
+@dp.message_handler(IsPrivate(), text_contains="Mahsulotlar")
 async def select_category(msg: Message):
     await msg.answer(
         "Mahsulot tanlang", reply_markup=categoryMenu
         )
     
 
-@dp.message_handler(text="📃 Qo'llanma")
+@dp.message_handler(IsPrivate(), text="📃 Qo'llanma")
 async def manual(msg: Message):
     text = "<b>Admin bilan bog'lanish:</b>👇\n"
     text += "https://t.me/Asliddinbek_official"
