@@ -10,6 +10,8 @@ word = [
     'dinahuy',
     'ahmoq',
     'Ahmoq',
+    'axmoq',
+    'Axmoq',
     'ovsar',
     'Ovsar',
     'kot',
@@ -18,7 +20,7 @@ word = [
     "Ko't",
     'pidaras',
     'Pidaras',
-    'Am'
+    'Am',
     'am',
     
 ]

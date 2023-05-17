@@ -118,7 +118,7 @@ async def unban_user(msg: types.Message):
     await msg.delete()
     await service_message.delete()
 
-
+from words import word
 @dp.message_handler(IsGroup(), content_types=types.ContentType.ANY)
 async def del_ads(msg: types.Message):
     if msg.entities:
@@ -133,16 +133,9 @@ async def del_ads(msg: types.Message):
               await msg.delete()
               text = f"Hurmatli <b>{msg.from_user.get_mention(as_html=True)}</b> iltimos reklama tarqatmang!!!"
               await msg.answer(text)
-        
-    
-
-
-# from words import word
-# @dp.message_handler(IsGroup(), content_types=types.ContentType.ANY)
-# async def offensive_word(msg: types.Message):
-#     for w in word:
-#         if w in msg.text:
-#             await msg.delete()
-#             await msg.answer(f"<b>{msg.from_user.full_name}</b> iltimos guruhda haqoratli so'zlar ishlatmang!!!")
+    for w in word:
+        if w in msg.text:
+            await msg.delete()
+            await msg.answer(f"<b>{msg.from_user.get_mention(as_html=True)}</b> iltimos guruhda haqoratli so'zlar ishlatmang!!!")
 
 
