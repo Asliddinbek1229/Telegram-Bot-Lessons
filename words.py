@@ -1,15 +1,24 @@
 word = [
     'gandon',
+    'Gandon',
     'jalap',
+    'Jalap',
     'dinaxuy',
+    'Dinaxuy',
     'dinnaxuy',
-    'dinnahuy',
+    'Dinnahuy',
     'dinahuy',
     'ahmoq',
+    'Ahmoq',
     'ovsar',
+    'Ovsar',
     'kot',
+    'Kot',
     "ko't",
+    "Ko't",
     'pidaras',
+    'Pidaras',
+    'Am'
     'am',
     
 ]

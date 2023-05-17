@@ -119,12 +119,30 @@ async def unban_user(msg: types.Message):
     await service_message.delete()
 
 
-from words import word
-@dp.message_handler(IsGroup())
-async def offensive_word(msg: types.Message):
-    for w in word:
-        if w in msg.text:
-            await msg.delete()
-            await msg.answer(f"<b>{msg.from_user.full_name}</b> iltimos guruhda haqoratli so'zlar ishlatmang!!!")
+@dp.message_handler(IsGroup(), content_types=types.ContentType.ANY)
+async def del_ads(msg: types.Message):
+    if msg.entities:
+        for entity in msg.entities:
+            if entity.type in ['url', 'text_link', 'mention']:
+              await msg.delete()
+              text = f"Hurmatli <b>{msg.from_user.get_mention(as_html=True)}</b> iltimos reklama tarqatmang!!!"
+              await msg.answer(text)
+    elif msg.caption_entities:
+        for entity in msg.caption_entities:
+            if entity.type in ['url', 'text_link', 'mention']:
+              await msg.delete()
+              text = f"Hurmatli <b>{msg.from_user.get_mention(as_html=True)}</b> iltimos reklama tarqatmang!!!"
+              await msg.answer(text)
+        
+    
+
+
+# from words import word
+# @dp.message_handler(IsGroup(), content_types=types.ContentType.ANY)
+# async def offensive_word(msg: types.Message):
+#     for w in word:
+#         if w in msg.text:
+#             await msg.delete()
+#             await msg.answer(f"<b>{msg.from_user.full_name}</b> iltimos guruhda haqoratli so'zlar ishlatmang!!!")
 
 
