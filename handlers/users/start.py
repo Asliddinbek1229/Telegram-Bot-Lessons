@@ -13,23 +13,33 @@ from loader import dp, bot
 
 @dp.message_handler(commands=['start'])
 async def show_channels(message: types.Message):
-    channels_format = str()
+    subscription = int()
+    result = str()
     for channel in CHANNELS:
-        chat = await bot.get_chat(channel)
-        invite_link = await chat.export_invite_link()
-        # logging.info(invite_link)
-        channels_format += f"👉 <a href='{invite_link}'>{chat.title}</a>\n"
+        status = await chek(user_id=message.from_user.id, channel=channel)
+        channel = await bot.get_chat(channel)
+        if status:
+            subscription += 1
 
-    await message.answer(f"Quyidagi kanallarga obuna bo'ling: 👇",
-                         reply_markup=chek_button,
-                         disable_web_page_preview=True)
+    if subscription == 2:
+        await message.answer("Quyidagilardan birini tanlang👇👇👇", reply_markup=menuStart)
+    else:
+        # channels_format = str()
+        # for channel in CHANNELS:
+            # chat = await bot.get_chat(channel)
+            # invite_link = await chat.export_invite_link()
+            # # logging.info(invite_link)
+            # channels_format += f"👉 <a href='{invite_link}'>{chat.title}</a>\n"
+
+        await message.answer(f"Quyidagi kanallarga obuna bo'ling: 👇",
+                        reply_markup=chek_button,
+                        disable_web_page_preview=True)
 
 
 @dp.callback_query_handler(text="check_subs")
 async def checker(call: types.CallbackQuery):
     await call.answer()
     subscription = int()
-    result = str()
     for channel in CHANNELS:
         status = await chek(user_id=call.from_user.id, channel=channel)
         channel = await bot.get_chat(channel)
