@@ -16,6 +16,7 @@ async def select_category(msg: Message):
     await msg.answer(
         "Mahsulot tanlang", reply_markup=categoryMenu
         )
+    await msg.delete()
     
 
 @dp.message_handler(IsPrivate(), text="📃 Qo'llanma")

@@ -3,6 +3,7 @@ import logging
 from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandStart
 from keyboards.inline.subscription import chek_button
+from keyboards.default.startMenuKeyboard import menuStart
 from utils.misc.subscription import chek
 from data.config import CHANNELS
 
@@ -19,8 +20,7 @@ async def show_channels(message: types.Message):
         # logging.info(invite_link)
         channels_format += f"👉 <a href='{invite_link}'>{chat.title}</a>\n"
 
-    await message.answer(f"Quyidagi kanallarga obuna bo'ling: \n"
-                         f"{channels_format}",
+    await message.answer(f"Quyidagi kanallarga obuna bo'ling: 👇",
                          reply_markup=chek_button,
                          disable_web_page_preview=True)
 
@@ -28,15 +28,15 @@ async def show_channels(message: types.Message):
 @dp.callback_query_handler(text="check_subs")
 async def checker(call: types.CallbackQuery):
     await call.answer()
+    subscription = int()
     result = str()
     for channel in CHANNELS:
         status = await chek(user_id=call.from_user.id, channel=channel)
         channel = await bot.get_chat(channel)
         if status:
-            result += f"<b>{channel.title}</b> kanaliga obuna bo'lgansiz!\n\n"
-        else:
-            invite_link = await channel.export_invite_link()
-            result += (f"<b>{channel.title}</b> kanaliga obuna bo'lmagansiz. "
-                       f"<a href='{invite_link}'>Obuna bo'ling</a>\n\n")
+            subscription += 1
 
-    await call.message.answer(result, disable_web_page_preview=True)
+    if subscription == 2:
+        await call.message.answer("Siz botdan foydalanishingiz mumkin", reply_markup=menuStart)
+    else:
+        await call.message.answer("Botdan foydalanish uchun barcha kanallarga obuna bo'ling!!!", disable_web_page_preview=True)
