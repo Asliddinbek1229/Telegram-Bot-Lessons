@@ -26,8 +26,7 @@ class BigBrother(BaseMiddleware):
         result = "Botdan foydalanish uchun quyidagi kanallarga obuna bo'ling: 👇"
         final_status = True
         for channel in CHANNELS:
-            status = await chek(user_id=user,
-                                              channel=channel)
+            status = await chek(user_id=user, channel=channel)
             final_status *= status
             channel = await bot.get_chat(channel)
             

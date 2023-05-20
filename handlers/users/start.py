@@ -47,6 +47,8 @@ async def checker(call: types.CallbackQuery):
             subscription += 1
 
     if subscription == 2:
-        await call.message.answer("Siz botdan foydalanishingiz mumkin", reply_markup=menuStart)
+        await call.message.delete()
+        await call.message.answer(
+            "Siz botdan foydalanishingiz mumkin\nQuyidagilardan birini tanlang 👇👇👇", reply_markup=menuStart)
     else:
         await call.message.answer("Botdan foydalanish uchun barcha kanallarga obuna bo'ling!!!", disable_web_page_preview=True)
