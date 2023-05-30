@@ -7,5 +7,7 @@ from . import info_html
 from . import send_photos
 from . import location_handler
 from . import contact_handler
+from . import calbackHandler
+from . import inlineHandler
 # from . import docs_handler
 from . import echo

@@ -7,13 +7,13 @@ from loader import dp, bot
 from keyboards.inline.buy_color import buy_btn
 
 
-@dp.message_handler(content_types=types.ContentType.PHOTO)
-async def get_file_id(msg: types.Message):
-    await msg.answer(msg.photo[-1].file_id)
+# @dp.message_handler(content_types=types.ContentType.PHOTO)
+# async def get_file_id(msg: types.Message):
+#     await msg.answer(msg.photo[-1].file_id)
 
-@dp.message_handler(content_types=types.ContentType.VIDEO)
-async def get_file_id_video(msg: types.Message):
-    await msg.answer(msg.video.file_id)
+# @dp.message_handler(content_types=types.ContentType.VIDEO)
+# async def get_file_id_video(msg: types.Message):
+#     await msg.answer(msg.video.file_id)
 
 
 @dp.message_handler(Command('logo'))
