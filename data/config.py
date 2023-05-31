@@ -7,3 +7,4 @@ env.read_env()
 BOT_TOKEN = env.str("BOT_TOKEN")  # Bot toekn
 ADMINS = env.list("ADMINS")  # adminlar ro'yxati
 CHANNELS = ["-1001936698333",'@biomaqsad']
+PROVIDER_TOKEN = env.str("PROVIDER_TOKEN")
