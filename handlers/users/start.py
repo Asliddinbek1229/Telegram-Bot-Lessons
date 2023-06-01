@@ -1,18 +1,30 @@
 import logging
+import sqlite3
 
 from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandStart
 from keyboards.inline.subscription import chek_button
 from keyboards.default.startMenuKeyboard import menuStart
 from utils.misc.subscription import chek
-from data.config import CHANNELS
+from data.config import CHANNELS, ADMINS
 
 from filters import IsPrivate
 
-from loader import dp, bot
+from loader import dp, bot, db
 
 @dp.message_handler(commands=['start'])
 async def show_channels(message: types.Message):
+    name = message.from_user.full_name
+    id = message.from_user.id
+    try:
+        db.add_user(id=id, name=name)
+    except sqlite3.IntegrityError as err:
+        await bot.send_message(chat_id=ADMINS[0], text=err)
+
+    count = db.count_users()[0]
+    msg = f"{message.from_user.full_name} bazaga qo'shildi.\nBazada {count} ta foydalanuvchi bor"
+    await bot.send_message(chat_id=ADMINS[0], text=msg)
+
     subscription = int()
     result = str()
     for channel in CHANNELS:
